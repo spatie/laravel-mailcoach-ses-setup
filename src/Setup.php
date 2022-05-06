@@ -24,14 +24,12 @@ class Setup
     public function install()
     {
             $this
-                /*
                 ->ensureValidAwsCredentials()
                 ->ensureConfigurationSetDoesNotExistYet()
                 ->createConfigurationSet()
                 ->createSnsTopic()
                 ->createSnsSubscription()
                 ->addSnsSubscriptionToSesTopic()
-                */
                 ->createSesIdentify();
     }
 
