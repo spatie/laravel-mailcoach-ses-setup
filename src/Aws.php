@@ -6,7 +6,6 @@ use Aws\Result;
 use Aws\SesV2\Exception\SesV2Exception;
 use Aws\SesV2\SesV2Client;
 use Aws\Sns\SnsClient;
-use Illuminate\Support\Str;
 
 class Aws
 {
@@ -18,8 +17,7 @@ class Aws
         protected string $key,
         protected string $secret,
         protected string $region
-    )
-    {
+    ) {
         $this->ses = new SesV2Client([
             'credentials' => [
                 'key' => $key,
@@ -77,21 +75,20 @@ class Aws
             'Name' => $name,
         ]);
 
-        foreach($result->get('Topics') as $topic) {
+        foreach ($result->get('Topics') as $topic) {
             if (str_ends_with($topic['TopicArn'], ":{$name}", )) {
                 return $topic['TopicArn'];
             }
         }
 
-         return null;
+        return null;
     }
 
     public function createSnsSubscription(
         string $snsTopicArn,
         string $protocol,
         string $endpoint,
-    )
-    {
+    ) {
         $this->sns->subscribe([
             'TopicArn' => $snsTopicArn,
             'Protocol' => $protocol,

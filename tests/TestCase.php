@@ -3,7 +3,6 @@
 namespace Spatie\LaravelMailcoachSesSetup\Tests;
 
 use Dotenv\Dotenv;
-use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
 use Spatie\LaravelMailcoachSesSetup\SesSetupServiceProvider;
 
@@ -25,7 +24,7 @@ class TestCase extends Orchestra
 
     protected function loadEnvironmentVariables()
     {
-        if (!file_exists(__DIR__ . '/../.env')) {
+        if (! file_exists(__DIR__ . '/../.env')) {
             return;
         }
 

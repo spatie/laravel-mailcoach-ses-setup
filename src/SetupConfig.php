@@ -14,9 +14,9 @@ class SetupConfig
     public function __construct(
         public string $key,
         public string $secret,
-        public string $region)
+        public string $region
+    )
     {
-
     }
 
     public function setSesConfigurationName(string $name): self
