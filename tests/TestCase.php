@@ -2,9 +2,10 @@
 
 namespace Spatie\LaravelMailcoachSesSetup\Tests;
 
+use Dotenv\Dotenv;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\LaravelMailcoachSesSetup\LaravelMailcoachSesSetupServiceProvider;
+use Spatie\LaravelMailcoachSesSetup\SesSetupServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -12,25 +13,24 @@ class TestCase extends Orchestra
     {
         parent::setUp();
 
-        Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'Spatie\\LaravelMailcoachSesSetup\\Database\\Factories\\'.class_basename($modelName).'Factory'
-        );
+        $this->loadEnvironmentVariables();
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            LaravelMailcoachSesSetupServiceProvider::class,
+            SesSetupServiceProvider::class,
         ];
     }
 
-    public function getEnvironmentSetUp($app)
+    protected function loadEnvironmentVariables()
     {
-        config()->set('database.default', 'testing');
+        if (!file_exists(__DIR__ . '/../.env')) {
+            return;
+        }
 
-        /*
-        $migration = include __DIR__.'/../database/migrations/create_laravel-mailcoach-ses-setup_table.php.stub';
-        $migration->up();
-        */
+        $dotEnv = Dotenv::createImmutable(__DIR__ . '/..');
+
+        $dotEnv->load();
     }
 }
