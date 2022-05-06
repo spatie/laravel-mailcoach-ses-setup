@@ -15,8 +15,7 @@ class SetupConfig
         public string $key,
         public string $secret,
         public string $region
-    )
-    {
+    ) {
     }
 
     public function setSesConfigurationName(string $name): self
