@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Spatie\LaravelMailcoachSesSetup\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelMailcoachSesSetupCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-mailcoach-ses-setup';
 
     public $description = 'My command';
 
