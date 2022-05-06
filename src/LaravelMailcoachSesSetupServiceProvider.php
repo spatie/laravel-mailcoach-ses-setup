@@ -2,9 +2,9 @@
 
 namespace Spatie\LaravelMailcoachSesSetup;
 
+use Spatie\LaravelMailcoachSesSetup\Commands\LaravelMailcoachSesSetupCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
-use Spatie\LaravelMailcoachSesSetup\Commands\LaravelMailcoachSesSetupCommand;
 
 class LaravelMailcoachSesSetupServiceProvider extends PackageServiceProvider
 {
