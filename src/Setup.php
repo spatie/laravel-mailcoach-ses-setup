@@ -21,15 +21,18 @@ class Setup
         $this->config = $setupConfig;
     }
 
-    public function start()
+    public function install()
     {
-        $this
-            ->ensureValidAwsCredentials()
-           // ->ensureConfigurationSetDoesNotExistYet()
-           // ->createConfigurationSet()
-            ->createSnsTopic()
-            ->createSnsSubscription()
-            ->addSnsSubscriptionToSesTopic();
+            $this
+                /*
+                ->ensureValidAwsCredentials()
+                ->ensureConfigurationSetDoesNotExistYet()
+                ->createConfigurationSet()
+                ->createSnsTopic()
+                ->createSnsSubscription()
+                ->addSnsSubscriptionToSesTopic()
+                */
+                ->createSesIdentify();
     }
 
     protected function ensureValidAwsCredentials(): self
@@ -39,8 +42,6 @@ class Setup
         } catch (SesV2Exception $exception) {
             throw InvalidAwsCredentials::make($exception, $this->config);
         }
-
-        event(new CredentialsValidatedEvent());
 
         return $this;
     }
@@ -57,8 +58,6 @@ class Setup
     protected function createConfigurationSet(): self
     {
         $this->aws->createConfigurationSet($this->config->sesConfigurationName);
-
-        event(new ConfigurationSetCreatedEvent($this->config->sesConfigurationName));
 
         return $this;
     }
@@ -92,5 +91,10 @@ class Setup
         return $this;
     }
 
+    protected function createSesIdentify(): self
+    {
+        $this->aws->addSesIdentity('freek@spatie.be');
 
+        return $this;
+    }
 }

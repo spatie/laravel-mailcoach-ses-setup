@@ -117,4 +117,13 @@ class Aws
 
         return $this;
     }
+
+    public function addSesIdentity(string $email): self
+    {
+        $this->ses->createEmailIdentity([
+            'EmailIdentity' => $email,
+        ]);
+
+        return $this;
+    }
 }

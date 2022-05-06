@@ -10,5 +10,5 @@ it('can test', function () {
 
     $config = new SetupConfig($key, $secret, $region);
 
-    (new Setup($config))->start();
+    (new Setup($config))->install();
 });
