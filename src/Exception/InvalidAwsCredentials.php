@@ -15,6 +15,7 @@ class InvalidAwsCredentials extends Exception
         if (empty($message) && str_contains($exception->message, 'Could not resolve host')) {
             $message = "You have specified an invalid region: {$config->region}.";
         };
+
         return new self($message, previous: $exception);
     }
 }

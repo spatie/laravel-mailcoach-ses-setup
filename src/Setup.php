@@ -47,7 +47,7 @@ class Setup
 
     protected function ensureConfigurationSetDoesNotExistYet(): self
     {
-        if($this->aws->configurationSetExists($this->config->sesConfigurationName)) {
+        if ($this->aws->configurationSetExists($this->config->sesConfigurationName)) {
             throw ConfigurationSetAlreadyExists::make($this->config->sesConfigurationName);
         }
 
@@ -91,6 +91,4 @@ class Setup
 
         return $this;
     }
-
-
 }

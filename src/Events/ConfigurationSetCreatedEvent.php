@@ -6,6 +6,5 @@ class ConfigurationSetCreatedEvent
 {
     public function __construct(public string $name)
     {
-
     }
 }
