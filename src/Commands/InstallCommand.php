@@ -14,7 +14,7 @@ class InstallCommand extends Command
 
     public function handle(): int
     {
-        $this->info("Let's setup your AWS account!");
+        $this->info("Let's set up your AWS account!");
 
         $accessKey = $this->ask('Access Key Id?');
         $accessKeySecret = $this->ask('Access Key Secret?');
