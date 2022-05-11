@@ -13,6 +13,10 @@ class TestCase extends Orchestra
         parent::setUp();
 
         $this->loadEnvironmentVariables();
+
+        $this->key = env('AWS_ACCESS_KEY_ID');
+        $this->secret = env('AWS_SECRET_ACCESS_KEY');
+        $this->region = env('AWS_DEFAULT_REGION');
     }
 
     protected function getPackageProviders($app)

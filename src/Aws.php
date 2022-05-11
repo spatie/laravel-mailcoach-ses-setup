@@ -17,7 +17,8 @@ class Aws
         protected string $key,
         protected string $secret,
         protected string $region
-    ) {
+    )
+    {
         $this->ses = new SesV2Client([
             'credentials' => [
                 'key' => $key,
@@ -60,6 +61,20 @@ class Aws
         ]);
     }
 
+    public function deleteConfigurationSet(string $name)
+    {
+        try {
+            $this->ses->deleteConfigurationSet([
+                'ConfigurationSetName' => $name,
+            ]);
+        } catch (SesV2Exception $exception) {
+            if ($exception->getAwsErrorCode() !== 'NotFoundException') {
+                throw $exception;
+            }
+        }
+
+    }
+
     public function createSnsTopic(string $name): string
     {
         $result = $this->sns->createTopic([
@@ -69,6 +84,19 @@ class Aws
         return $result->get('TopicArn');
     }
 
+    public function deleteSnsTopic(string $name)
+    {
+        $arn = $this->getSnsTopicArn($name);
+
+        if (! $arn) {
+            return;
+        }
+
+        $this->sns->deleteTopic([
+            'TopicArn' => $arn,
+        ]);
+    }
+
     public function getSnsTopicArn(string $name): ?string
     {
         $result = $this->sns->listTopics([
@@ -76,7 +104,7 @@ class Aws
         ]);
 
         foreach ($result->get('Topics') as $topic) {
-            if (str_ends_with($topic['TopicArn'], ":{$name}", )) {
+            if (str_ends_with($topic['TopicArn'], ":{$name}",)) {
                 return $topic['TopicArn'];
             }
         }
@@ -88,11 +116,20 @@ class Aws
         string $snsTopicArn,
         string $protocol,
         string $endpoint,
-    ) {
+        int    $maxReceivesPerSecond
+    )
+    {
         $this->sns->subscribe([
             'TopicArn' => $snsTopicArn,
             'Protocol' => $protocol,
             'Endpoint' => $endpoint,
+            'Attributes' => [
+                'DeliveryPolicy' => json_encode([
+                    'throttlePolicy' => [
+                        'maxReceivesPerSecond' => $maxReceivesPerSecond,
+                    ]
+                ])
+            ]
         ]);
     }
 

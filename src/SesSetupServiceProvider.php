@@ -2,6 +2,7 @@
 
 namespace Spatie\LaravelMailcoachSesSetup;
 
+use Spatie\LaravelMailcoachSesSetup\Commands\InstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
@@ -11,6 +12,8 @@ class SesSetupServiceProvider extends PackageServiceProvider
     {
         $package
             ->name('laravel-mailcoach-ses-setup')
-            ->hasMigration('create_laravel-mailcoach-ses-setup_table');
+            ->hasCommands(
+                InstallCommand::class
+            );
     }
 }

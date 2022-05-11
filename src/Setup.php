@@ -30,7 +30,27 @@ class Setup
                 ->createSnsTopic()
                 ->createSnsSubscription()
                 ->addSnsSubscriptionToSesTopic()
-                ->createSesIdentify();
+                ->createSesIdentity();
+
+            return $this;
+    }
+
+    public function verify(): self
+    {
+        $this
+            ->ensureValidAwsCredentials();
+
+        return $this;
+    }
+
+    public function uninstall(): self
+    {
+        $this
+            ->ensureValidAwsCredentials()
+            ->deleteConfigurationSet()
+            ->deleteSnsTopic();
+
+        return $this;
     }
 
     protected function ensureValidAwsCredentials(): self
@@ -74,7 +94,8 @@ class Setup
         $this->aws->createSnsSubscription(
             $arn,
             $this->config->snsSubscriptionProtocol,
-            $this->config->snsSubscriptionEndpoint
+            $this->config->snsSubscriptionEndpoint,
+            $this->config->maxWebhookReceivesPerSecond,
         );
 
         return $this;
@@ -89,9 +110,27 @@ class Setup
         return $this;
     }
 
-    protected function createSesIdentify(): self
+    protected function createSesIdentity(): self
     {
-        $this->aws->addSesIdentity('freek@spatie.be');
+        if (! $email = $this->config->sesIdentifyEmail) {
+            return $this;
+        }
+
+        $this->aws->addSesIdentity($email);
+
+        return $this;
+    }
+
+    protected function deleteConfigurationSet(): self
+    {
+        $this->aws->deleteConfigurationSet($this->config->sesConfigurationName);
+
+        return $this;
+    }
+
+    protected function deleteSnsTopic(): self
+    {
+        $this->aws->deleteSnsTopic($this->config->snsTopicName);
 
         return $this;
     }
