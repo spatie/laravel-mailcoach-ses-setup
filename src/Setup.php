@@ -3,8 +3,6 @@
 namespace Spatie\LaravelMailcoachSesSetup;
 
 use Aws\SesV2\Exception\SesV2Exception;
-use Spatie\LaravelMailcoachSesSetup\Events\ConfigurationSetCreatedEvent;
-use Spatie\LaravelMailcoachSesSetup\Events\CredentialsValidatedEvent;
 use Spatie\LaravelMailcoachSesSetup\Exception\ConfigurationSetAlreadyExists;
 use Spatie\LaravelMailcoachSesSetup\Exception\InvalidAwsCredentials;
 
@@ -23,7 +21,7 @@ class Setup
 
     public function install()
     {
-            $this
+        $this
                 ->ensureValidAwsCredentials()
                 ->ensureConfigurationSetDoesNotExistYet()
                 ->createConfigurationSet()
@@ -66,7 +64,7 @@ class Setup
 
     protected function ensureConfigurationSetDoesNotExistYet(): self
     {
-        if($this->aws->configurationSetExists($this->config->sesConfigurationName)) {
+        if ($this->aws->configurationSetExists($this->config->sesConfigurationName)) {
             throw ConfigurationSetAlreadyExists::make($this->config->sesConfigurationName);
         }
 
