@@ -51,6 +51,11 @@ class MailcoachSes
         return $this;
     }
 
+    public function aws(): Aws
+    {
+        return $this->aws;
+    }
+
     protected function ensureValidAwsCredentials(): self
     {
         try {

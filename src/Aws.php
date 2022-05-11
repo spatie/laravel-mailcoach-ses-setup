@@ -53,14 +53,16 @@ class Aws
         return true;
     }
 
-    public function createConfigurationSet(string $name)
+    public function createConfigurationSet(string $name): self
     {
         $this->ses->createConfigurationSet([
             'ConfigurationSetName' => $name,
         ]);
+
+        return $this;
     }
 
-    public function deleteConfigurationSet(string $name)
+    public function deleteConfigurationSet(string $name): self
     {
         try {
             $this->ses->deleteConfigurationSet([
@@ -71,6 +73,8 @@ class Aws
                 throw $exception;
             }
         }
+
+        return $this;
     }
 
     public function createSnsTopic(string $name): string
@@ -82,17 +86,26 @@ class Aws
         return $result->get('TopicArn');
     }
 
-    public function deleteSnsTopic(string $name)
+    public function snsTopicExists(string $name): bool
+    {
+        $arn = $this->getSnsTopicArn($name);
+
+        return (bool)$arn;
+    }
+
+    public function deleteSnsTopic(string $name): self
     {
         $arn = $this->getSnsTopicArn($name);
 
         if (! $arn) {
-            return;
+            return $this;
         }
 
         $this->sns->deleteTopic([
             'TopicArn' => $arn,
         ]);
+
+        return $this;
     }
 
     public function getSnsTopicArn(string $name): ?string
@@ -115,7 +128,7 @@ class Aws
         string $protocol,
         string $endpoint,
         int    $maxReceivesPerSecond
-    ) {
+    ): self {
         $this->sns->subscribe([
             'TopicArn' => $snsTopicArn,
             'Protocol' => $protocol,
@@ -128,6 +141,8 @@ class Aws
                 ]),
             ],
         ]);
+
+        return $this;
     }
 
     public function createConfigurationSetEventDestination(string $configurationName, $snsDestinationTopicArn): self
