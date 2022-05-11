@@ -10,6 +10,7 @@ jobs:
   test:
     runs-on: ${{ matrix.os }}
     strategy:
+      max-parallel: 1
       fail-fast: true
       matrix:
         os: [ubuntu-latest, windows-latest]
