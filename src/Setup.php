@@ -30,7 +30,7 @@ class Setup
                 ->addSnsSubscriptionToSesTopic()
                 ->createSesIdentity();
 
-            return $this;
+        return $this;
     }
 
     public function verify(): self

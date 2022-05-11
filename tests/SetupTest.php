@@ -15,7 +15,6 @@ it('can configure an AWS account for use with Mailcoach', function () {
 });
 
 it('can remove the Mailcoach configuration for an AWS account', function () {
-
     $config = new SetupConfig(
         $this->key,
         $this->secret,
