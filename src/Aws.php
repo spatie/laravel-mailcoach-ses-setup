@@ -17,8 +17,7 @@ class Aws
         protected string $key,
         protected string $secret,
         protected string $region
-    )
-    {
+    ) {
         $this->ses = new SesV2Client([
             'credentials' => [
                 'key' => $key,
@@ -72,7 +71,6 @@ class Aws
                 throw $exception;
             }
         }
-
     }
 
     public function createSnsTopic(string $name): string
@@ -104,7 +102,7 @@ class Aws
         ]);
 
         foreach ($result->get('Topics') as $topic) {
-            if (str_ends_with($topic['TopicArn'], ":{$name}",)) {
+            if (str_ends_with($topic['TopicArn'], ":{$name}", )) {
                 return $topic['TopicArn'];
             }
         }
@@ -117,8 +115,7 @@ class Aws
         string $protocol,
         string $endpoint,
         int    $maxReceivesPerSecond
-    )
-    {
+    ) {
         $this->sns->subscribe([
             'TopicArn' => $snsTopicArn,
             'Protocol' => $protocol,
@@ -127,9 +124,9 @@ class Aws
                 'DeliveryPolicy' => json_encode([
                     'throttlePolicy' => [
                         'maxReceivesPerSecond' => $maxReceivesPerSecond,
-                    ]
-                ])
-            ]
+                    ],
+                ]),
+            ],
         ]);
     }
 
