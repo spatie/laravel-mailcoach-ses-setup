@@ -115,7 +115,7 @@ class MailcoachSes
 
     protected function createSesIdentity(): self
     {
-        if (!$email = $this->config->sesIdentifyEmail) {
+        if (! $email = $this->config->sesIdentifyEmail) {
             return $this;
         }
 
