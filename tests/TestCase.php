@@ -4,7 +4,7 @@ namespace Spatie\LaravelMailcoachSesSetup\Tests;
 
 use Dotenv\Dotenv;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\LaravelMailcoachSesSetup\SesSetupServiceProvider;
+use Spatie\LaravelMailcoachSesSetup\MailcoachSesSetupServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -22,7 +22,7 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app)
     {
         return [
-            SesSetupServiceProvider::class,
+            MailcoachSesSetupServiceProvider::class,
         ];
     }
 

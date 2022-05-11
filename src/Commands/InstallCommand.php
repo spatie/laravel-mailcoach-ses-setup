@@ -3,8 +3,8 @@
 namespace Spatie\LaravelMailcoachSesSetup\Commands;
 
 use Illuminate\Console\Command;
-use Spatie\LaravelMailcoachSesSetup\Setup;
-use Spatie\LaravelMailcoachSesSetup\SetupConfig;
+use Spatie\LaravelMailcoachSesSetup\MailcoachSes;
+use Spatie\LaravelMailcoachSesSetup\MailcoachSesConfig;
 
 class InstallCommand extends Command
 {
@@ -23,13 +23,13 @@ class InstallCommand extends Command
         $endpoint = $this->ask('To which URL should SES send feedback (should start with https://)');
         $email = $this->ask('From which email address do you wish to send mails?');
 
-        $config = new SetupConfig($accessKey, $accessKeySecret, $region, $endpoint);
+        $config = new MailcoachSesConfig($accessKey, $accessKeySecret, $region, $endpoint);
 
         $config
             ->setConfigurationName($configurationName)
             ->sesIdentityEmail($email);
 
-        (new Setup($config))->install();
+        (new MailcoachSes($config))->install();
 
         $this->info('SES was configured successfully!');
 

@@ -4,11 +4,11 @@ namespace Spatie\LaravelMailcoachSesSetup\Exception;
 
 use Aws\SesV2\Exception\SesV2Exception;
 use Exception;
-use Spatie\LaravelMailcoachSesSetup\SetupConfig;
+use Spatie\LaravelMailcoachSesSetup\MailcoachSesConfig;
 
 class InvalidAwsCredentials extends Exception
 {
-    public static function make(SesV2Exception $exception, SetupConfig $config): self
+    public static function make(SesV2Exception $exception, MailcoachSesConfig $config): self
     {
         $message = $exception->getAwsErrorMessage();
 

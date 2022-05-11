@@ -2,7 +2,7 @@
 
 namespace Spatie\LaravelMailcoachSesSetup;
 
-class SetupConfig
+class MailcoachSesConfig
 {
     public string $sesConfigurationName = 'mailcoach';
     public string $snsTopicName = 'mailcoach';

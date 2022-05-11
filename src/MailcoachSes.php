@@ -6,31 +6,31 @@ use Aws\SesV2\Exception\SesV2Exception;
 use Spatie\LaravelMailcoachSesSetup\Exception\ConfigurationSetAlreadyExists;
 use Spatie\LaravelMailcoachSesSetup\Exception\InvalidAwsCredentials;
 
-class Setup
+class MailcoachSes
 {
     protected Aws $aws;
 
-    protected SetupConfig $config;
+    protected MailcoachSesConfig $config;
 
-    public function __construct(SetupConfig $setupConfig)
+    public function __construct(MailcoachSesConfig $setupConfig)
     {
         $this->aws = new Aws($setupConfig->key, $setupConfig->secret, $setupConfig->region);
 
         $this->config = $setupConfig;
     }
 
-    public function install()
+    public function install(): self
     {
         $this
-                ->ensureValidAwsCredentials()
-                ->ensureConfigurationSetDoesNotExistYet()
-                ->createConfigurationSet()
-                ->createSnsTopic()
-                ->createSnsSubscription()
-                ->addSnsSubscriptionToSesTopic()
-                ->createSesIdentity();
+            ->ensureValidAwsCredentials()
+            ->ensureConfigurationSetDoesNotExistYet()
+            ->createConfigurationSet()
+            ->createSnsTopic()
+            ->createSnsSubscription()
+            ->addSnsSubscriptionToSesTopic()
+            ->createSesIdentity();
 
-            return $this;
+        return $this;
     }
 
     public function verify(): self
@@ -110,7 +110,7 @@ class Setup
 
     protected function createSesIdentity(): self
     {
-        if (! $email = $this->config->sesIdentifyEmail) {
+        if (!$email = $this->config->sesIdentifyEmail) {
             return $this;
         }
 
