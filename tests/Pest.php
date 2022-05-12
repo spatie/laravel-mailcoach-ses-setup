@@ -1,5 +1,5 @@
 <?php
 
-use Spatie\LaravelMailcoachSesSetup\Tests\TestCase;
+use Spatie\MailcoachSesSetup\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\LaravelMailcoachSesSetup;
+namespace Spatie\MailcoachSesSetup;
 
 class MailcoachSesConfig
 {

@@ -55,8 +55,8 @@ php artisan vendor:publish --tag="laravel-mailcoach-ses-setup-views"
 ## Usage
 
 ```php
-$laravelMailcoachSesSetup = new Spatie\LaravelMailcoachSesSetup();
-echo $laravelMailcoachSesSetup->echoPhrase('Hello, Spatie!');
+$MailcoachSesSetup = new Spatie\MailcoachSesSetup();
+echo $MailcoachSesSetup->echoPhrase('Hello, Spatie!');
 ```
 
 ## Testing

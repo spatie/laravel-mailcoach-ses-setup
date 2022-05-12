@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\LaravelMailcoachSesSetup;
+namespace Spatie\MailcoachSesSetup;
 
 use Aws\Result;
 use Aws\SesV2\Exception\SesV2Exception;

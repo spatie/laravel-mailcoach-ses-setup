@@ -1,7 +1,7 @@
 <?php
 
-use Spatie\LaravelMailcoachSesSetup\MailcoachSes;
-use Spatie\LaravelMailcoachSesSetup\MailcoachSesConfig;
+use Spatie\MailcoachSesSetup\MailcoachSes;
+use Spatie\MailcoachSesSetup\MailcoachSesConfig;
 
 beforeEach(function () {
     $config = new MailcoachSesConfig(

@@ -1,6 +1,6 @@
 <?php
 
-namespace Spatie\LaravelMailcoachSesSetup\Exception;
+namespace Spatie\MailcoachSesSetup\Exception;
 
 class ConfigurationSetAlreadyExists extends \Exception
 {

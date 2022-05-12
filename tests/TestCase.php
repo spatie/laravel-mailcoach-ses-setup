@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\LaravelMailcoachSesSetup\Tests;
+namespace Spatie\MailcoachSesSetup\Tests;
 
 use Dotenv\Dotenv;
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\LaravelMailcoachSesSetup\MailcoachSesSetupServiceProvider;
+use Spatie\MailcoachSesSetup\MailcoachSesSetupServiceProvider;
 
 class TestCase extends Orchestra
 {

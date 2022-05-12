@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\LaravelMailcoachSesSetup\Commands;
+namespace Spatie\MailcoachSesSetup\Commands;
 
 use Illuminate\Console\Command;
-use Spatie\LaravelMailcoachSesSetup\MailcoachSes;
-use Spatie\LaravelMailcoachSesSetup\MailcoachSesConfig;
+use Spatie\MailcoachSesSetup\MailcoachSes;
+use Spatie\MailcoachSesSetup\MailcoachSesConfig;
 
 class InstallCommand extends Command
 {

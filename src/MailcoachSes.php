@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\LaravelMailcoachSesSetup;
+namespace Spatie\MailcoachSesSetup;
 
 use Aws\SesV2\Exception\SesV2Exception;
-use Spatie\LaravelMailcoachSesSetup\Exception\ConfigurationSetAlreadyExists;
-use Spatie\LaravelMailcoachSesSetup\Exception\InvalidAwsCredentials;
+use Spatie\MailcoachSesSetup\Exception\ConfigurationSetAlreadyExists;
+use Spatie\MailcoachSesSetup\Exception\InvalidAwsCredentials;
 
 class MailcoachSes
 {

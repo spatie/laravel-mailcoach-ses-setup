@@ -1,10 +1,10 @@
 <?php
 
-namespace Spatie\LaravelMailcoachSesSetup\Exception;
+namespace Spatie\MailcoachSesSetup\Exception;
 
 use Aws\SesV2\Exception\SesV2Exception;
 use Exception;
-use Spatie\LaravelMailcoachSesSetup\MailcoachSesConfig;
+use Spatie\MailcoachSesSetup\MailcoachSesConfig;
 
 class InvalidAwsCredentials extends Exception
 {

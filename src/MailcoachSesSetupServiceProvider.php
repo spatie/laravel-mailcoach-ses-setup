@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\LaravelMailcoachSesSetup;
+namespace Spatie\MailcoachSesSetup;
 
-use Spatie\LaravelMailcoachSesSetup\Commands\InstallCommand;
-use Spatie\LaravelMailcoachSesSetup\Commands\UninstallCommand;
+use Spatie\MailcoachSesSetup\Commands\InstallCommand;
+use Spatie\MailcoachSesSetup\Commands\UninstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
