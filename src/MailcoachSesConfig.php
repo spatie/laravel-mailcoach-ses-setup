@@ -11,7 +11,7 @@ class MailcoachSesConfig
     public string $snsSubscriptionEndpoint;
 
     public int $maxWebhookReceivesPerSecond = 10;
-    
+
     public array $extraTrackingEvents = [];
 
     public ?string $sesIdentifyEmail = null;
@@ -33,11 +33,11 @@ class MailcoachSesConfig
 
         return $this;
     }
-    
+
     public function enableClickTracking(): self
     {
         $this->extraTrackingEvents[] = 'CLICK';
-        
+
         return $this;
     }
 
