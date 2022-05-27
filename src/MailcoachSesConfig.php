@@ -11,6 +11,8 @@ class MailcoachSesConfig
     public string $snsSubscriptionEndpoint;
 
     public int $maxWebhookReceivesPerSecond = 10;
+    
+    public array $extraTrackingEvents = [];
 
     public ?string $sesIdentifyEmail = null;
 
@@ -28,6 +30,20 @@ class MailcoachSesConfig
     {
         $this->sesConfigurationName = $name;
         $this->snsTopicName = $name;
+
+        return $this;
+    }
+    
+    public function enableClickTracking(): self
+    {
+        $this->extraTrackingEvents[] = 'CLICK';
+        
+        return $this;
+    }
+
+    public function enableOpenTracking(): self
+    {
+        $this->extraTrackingEvents[] = 'OPEN';
 
         return $this;
     }

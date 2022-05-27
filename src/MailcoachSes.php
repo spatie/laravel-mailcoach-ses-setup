@@ -56,7 +56,7 @@ class MailcoachSes
         return $this->aws;
     }
 
-    protected function ensureValidAwsCredentials(): self
+    public function ensureValidAwsCredentials(): self
     {
         try {
             $this->aws->getAwsAccount();
@@ -67,7 +67,7 @@ class MailcoachSes
         return $this;
     }
 
-    protected function ensureConfigurationSetDoesNotExistYet(): self
+    public function ensureConfigurationSetDoesNotExistYet(): self
     {
         if ($this->aws->configurationSetExists($this->config->sesConfigurationName)) {
             throw ConfigurationSetAlreadyExists::make($this->config->sesConfigurationName);
@@ -76,21 +76,21 @@ class MailcoachSes
         return $this;
     }
 
-    protected function createConfigurationSet(): self
+    public function createConfigurationSet(): self
     {
         $this->aws->createConfigurationSet($this->config->sesConfigurationName);
 
         return $this;
     }
 
-    protected function createSnsTopic(): self
+    public function createSnsTopic(): self
     {
         $this->aws->createSnsTopic($this->config->snsTopicName);
 
         return $this;
     }
 
-    protected function createSnsSubscription(): self
+    public function createSnsSubscription(): self
     {
         $arn = $this->aws->getSnsTopicArn($this->config->snsTopicName);
 
@@ -104,16 +104,20 @@ class MailcoachSes
         return $this;
     }
 
-    protected function addSnsSubscriptionToSesTopic(): self
+    public function addSnsSubscriptionToSesTopic(): self
     {
         $arn = $this->aws->getSnsTopicArn($this->config->snsTopicName);
 
-        $this->aws->createConfigurationSetEventDestination($this->config->sesConfigurationName, $arn);
+        $this->aws->createConfigurationSetEventDestination(
+            $this->config->sesConfigurationName,
+            $arn,
+            array_unique($this->config->extraTrackingEvents),
+        );
 
         return $this;
     }
 
-    protected function createSesIdentity(): self
+    public function createSesIdentity(): self
     {
         if (! $email = $this->config->sesIdentifyEmail) {
             return $this;
@@ -124,14 +128,14 @@ class MailcoachSes
         return $this;
     }
 
-    protected function deleteConfigurationSet(): self
+    public function deleteConfigurationSet(): self
     {
         $this->aws->deleteConfigurationSet($this->config->sesConfigurationName);
 
         return $this;
     }
 
-    protected function deleteSnsTopic(): self
+    public function deleteSnsTopic(): self
     {
         $this->aws->deleteSnsTopic($this->config->snsTopicName);
 

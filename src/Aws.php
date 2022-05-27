@@ -145,13 +145,20 @@ class Aws
         return $this;
     }
 
-    public function createConfigurationSetEventDestination(string $configurationName, $snsDestinationTopicArn): self
+    public function createConfigurationSetEventDestination(
+        string $configurationName, 
+        $snsDestinationTopicArn,
+        array $extraEvents = [],
+    ): self
     {
         $config = [
             'ConfigurationSetName' => $configurationName,
             'EventDestination' => [
                 'Enabled' => true,
-                'MatchingEventTypes' => ['REJECT', 'BOUNCE', 'COMPLAINT', 'OPEN', 'CLICK'],
+                'MatchingEventTypes' => array_merge(
+                    ['REJECT', 'BOUNCE', 'COMPLAINT'], 
+                    $extraEvents,
+                ),
                 'SnsDestination' => [
                     'TopicArn' => $snsDestinationTopicArn,
                 ],
