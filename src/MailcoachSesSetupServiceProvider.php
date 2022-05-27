@@ -2,10 +2,10 @@
 
 namespace Spatie\MailcoachSesSetup;
 
-use Spatie\MailcoachSesSetup\Commands\InstallCommand;
-use Spatie\MailcoachSesSetup\Commands\UninstallCommand;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
+use Spatie\MailcoachSesSetup\Commands\InstallCommand;
+use Spatie\MailcoachSesSetup\Commands\UninstallCommand;
 
 class MailcoachSesSetupServiceProvider extends PackageServiceProvider
 {
