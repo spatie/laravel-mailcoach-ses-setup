@@ -36,8 +36,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\MailcoachSesSetup\\": "src",
-            "Spatie\\MailcoachSesSetup\\Database\\Factories\\": "database/factories"
+            "Spatie\\MailcoachSesSetup\\": "src"
         }
     },
     "autoload-dev": {
